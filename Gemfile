@@ -54,3 +54,4 @@ end
 gem 'web-console', group: :development
 
 gem 'pg', group: :production
+gem 'rails_12factor', group: :production

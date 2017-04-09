@@ -25,9 +25,7 @@ test:
   database: product_test
 
 production:
-  database: product_production
   adapter: postgresql
-  username: glproduct
-  password: glproduct
-  port: 5432
-  host: glproduct.herokuapp.com
+  database: product_production
+  # username: glproduct
+  # password: glproduct

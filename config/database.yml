@@ -24,6 +24,8 @@ test:
   <<: *default
   database: product_test
 
-# production:
-#   <<: *default
-#   database: db/production.sqlite3
+production:
+  database: product_production
+  adapter: postgresql
+  host: localhost
+  password: glproduct

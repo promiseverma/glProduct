@@ -1,0 +1,8 @@
+$("#products").append("<%= escape_javascript render partial: 'product', collection: @products %>");
+
+// Hide link if it is last page otherwise update link
+<% if @products.total_pages == @products.current_page %>
+    $("#show_more_link").hide();
+<% else %>
+    $("#show_more_link").attr("href", "<%= products_path(:page => (@products.current_page + 1)) %>");
+<% end %>

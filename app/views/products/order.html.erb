@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="page-header"><h3>Thanks</h3>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-md-6">
+            <div class="alert alert-success">
+                <%= link_to "Back to list", products_path, :class => "btn close" %>
+               <span class="glyphicon glyphicon-ok"></span> <strong>Your order is successfully placed</strong>
+                <hr class="message-inner-separator">
+                <p style="float: left;"><strong>Products</strong></p><div style="float: right;"><strong>Details</strong></div><br/><br/>
+                <% @order.each do |order|%>
+                <p style="float: left;"><%= order.name%></p><div style="float: right;"><%= pices = get_piece(@arr, order.id)%></div><br/>
+                <% end %>
+                <p style="float: left;">Transaction Id</p><div style="float: right;"><%= @transaction["id"] %></div><br/><br/>
+                <p style="float: left;">Amount</p><div style="float: right;"><%= @transaction["amount"] %></div><br/><br/>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>

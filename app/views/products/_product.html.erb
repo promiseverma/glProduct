@@ -1,0 +1,16 @@
+<tr><td><%= link_to product.id, product_path(product) %></td>
+<td><%= product.name %></td>
+<td><%= product.description %></td>
+<td><%= product.price %></td>
+<td><%=l product.created_at %></td>
+<td>
+<%= button_tag t('.cart', :default => t("helpers.links.cart")),
+            :onclick => "createCookie('product', #{product.id}, 1)", :class => 'btn btn-success btn-xs' %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+            edit_product_path(product), :class => 'btn btn-default btn-xs' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+            product_path(product),
+            :method => :delete,
+            :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure you want to delete this product?')) },
+            :class => 'btn btn-xs btn-danger' %>
+</td></tr>

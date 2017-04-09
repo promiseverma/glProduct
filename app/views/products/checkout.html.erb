@@ -1,0 +1,33 @@
+<%- model_class = Product -%>
+<% g_total = 0 %>
+<% if flash[:notice] %>
+<div class="alert alert-warning"><%= flash[:notice] %></div>
+<% end %>
+<div class="container">
+<table class="table table-striped">
+	<thead>
+      <tr>
+        <th width="15%"><%= model_class.human_attribute_name(:name) %></th>
+        <th width="15%"><%= model_class.human_attribute_name(:price) %></th>
+        <th width="15%">Pieces</th>
+        <th width="20%">Total</th>
+      </tr>
+    </thead>
+    <% @order.each do |order|%>
+    <tr>
+    	<td><%= order.name%></td>
+    	<td><%= order.price%></td>
+    	<td><%= pices = get_piece(@arr, order.id)%></td>
+    	<td><% total = (pices*order.price) %><% g_total = g_total + total %><%= total %></td>
+    </tr>
+    <% end %>
+    <tr><td colspan="3" align="right">Grand Total</td>
+    	<td>
+    	<%= form_tag products_order_path, method: :post  do %>
+        <%= hidden_field_tag 'price', "#{g_total}"   %>
+        <%= g_total %>&nbsp;&nbsp;<%= button_tag "Order Now", :class => "btn btn_success"%>
+        <% end %>
+        </td>
+        </tr>
+</table>
+</div>

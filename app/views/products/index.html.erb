@@ -1,0 +1,66 @@
+<div class="container">
+  <%- model_class = Product -%>
+  <div class="page-header">
+    <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <%= link_to t('.new', :default => t("helpers.links.new")),new_product_path,:class => 'btn btn-primary' %>
+  <div style="text-align: right;font-size: 20px;">Cart Items&nbsp;&nbsp;<strong id="items"></strong>&nbsp;&nbsp;
+    <div style="float: right;">
+      <%= form_tag products_checkout_path, method: :post  do %>
+        <%= hidden_field_tag 'products_list'    %>
+        <%= button_tag "Checkout", :class => "btn btn-success", :onclick => "goForCheckout()"%>
+      <% end %>
+    </div>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th width="15%"><%= model_class.human_attribute_name(:id) %></th>
+        <th width="15%"><%= model_class.human_attribute_name(:name) %></th>
+        <th width="20%"><%= model_class.human_attribute_name(:description) %></th>
+        <th width="15%"><%= model_class.human_attribute_name(:price) %></th>
+        <th width="15%"><%= model_class.human_attribute_name(:created_at) %></th>
+        <th width="20%"><%=t '.actions', :default => t("helpers.actions") %></th>
+      </tr>
+    </thead>
+    <tbody id="products">
+      <%= render partial: "product", collection: @products %>
+    </tbody>
+  </table>
+  <div class="digg_pagination" style="float: left;padding: 10px;">
+    <%= will_paginate @products, :container => false %>
+  </div>
+  <% unless @products.total_pages < 2 %>
+    <%= link_to 'Load More', products_path(:page => params[:page].to_i == 0 ? 2 : params[:page].to_i+1), :remote => true, :id => 'show_more_link', :class => "btn btn-success" %>
+  <% end %>
+</div>
+<script type="text/javascript">
+  if(document.cookie != ""){
+    $("#items").html(document.cookie.split("=")[1].split(",").length);
+  }
+
+  var goForCheckout = function (){
+    $("#products_list").val(document.cookie.split("=")[1].split(","));
+  }
+
+  var createCookie = function(product, id, days) {
+    var expires;
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toGMTString();
+    }
+    else {
+        expires = "";
+    }
+    arr = [];
+    if(document.cookie != "" && document.cookie.split("=").length > 1){
+      arr.push(document.cookie.split("=")[1]);
+    }
+
+    arr.push(id);
+    document.cookie = product + "=" + arr;
+
+    $("#items").html(document.cookie.split("=")[1].split(",").length);
+}
+</script>

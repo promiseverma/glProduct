@@ -30,3 +30,4 @@ production:
   username: glproduct
   password: glproduct
   port: 5432
+  host: glproduct.herokuapp.com

@@ -27,5 +27,5 @@ test:
 production:
   database: product_production
   adapter: postgresql
-  host: localhost
+  username: glproduct
   password: glproduct

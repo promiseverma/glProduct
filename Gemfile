@@ -53,3 +53,4 @@ end
 
 gem 'web-console', group: :development
 
+gem 'pg', group: :production

@@ -29,3 +29,4 @@ production:
   adapter: postgresql
   username: glproduct
   password: glproduct
+  host: localhost

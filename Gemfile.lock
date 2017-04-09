@@ -89,7 +89,6 @@ GEM
     mini_portile2 (2.1.0)
     minitest (5.10.1)
     multi_json (1.12.1)
-    mysql2 (0.3.18)
     nokogiri (1.7.1)
       mini_portile2 (~> 2.1.0)
     pg (0.15.1)
@@ -200,7 +199,6 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   less-rails
-  mysql2
   pg
   rails (= 4.2.1)
   rails_12factor

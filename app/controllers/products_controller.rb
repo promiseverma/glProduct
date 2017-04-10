@@ -66,7 +66,9 @@ class ProductsController < ApplicationController
       if params["products_list"].nil? && session[:token].nil?
         format.html{redirect_to products_url}
       else
-        if params["products_list"].present?
+        if params["products_list"] == ""
+          format.html{redirect_to products_url}
+        elsif params["products_list"].present?
           session[:token] = generate_token
           OrderSession.create(products_list: params["products_list"], token: session[:token])
           @arr = params["products_list"].split(',')

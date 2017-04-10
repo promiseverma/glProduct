@@ -40,4 +40,25 @@ RSpec.describe ProductsController, :type => :controller do
       expect(assigns(:order)).to eq(order)
     end
   end
+
+  describe "#order", :if => false do
+     it "Check order fails" do
+      post :order, :price => "9999"
+
+
+      expect(response).to render_template("checkout")
+    end
+  end
+
+  describe "#order", :if => true do
+     it "Check order success" do
+      session[:token] = "sQYgHUbHwcQhhpshSoTWFQEzxUxwjZJLrlGmAGyfgEyadXuUDN"
+      order = OrderSession.create(products_list: "8,8", token: session[:token])
+      post :order, :price => "9999"
+
+
+      expect(response).to render_template("order")
+    end
+  end
+
 end

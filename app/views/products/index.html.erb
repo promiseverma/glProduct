@@ -1,3 +1,4 @@
+<%= javascript_include_tag 'product'%>
 <div class="container">
   <%- model_class = Product -%>
   <div class="page-header">
@@ -34,33 +35,3 @@
     <%= link_to 'Load More', products_path(:page => params[:page].to_i == 0 ? 2 : params[:page].to_i+1), :remote => true, :id => 'show_more_link', :class => "btn btn-success" %>
   <% end %>
 </div>
-<script type="text/javascript">
-  if(document.cookie != ""){
-    $("#items").html(document.cookie.split("=")[1].split(",").length);
-  }
-
-  var goForCheckout = function (){
-    $("#products_list").val(document.cookie.split("=")[1].split(","));
-  }
-
-  var createCookie = function(product, id, days) {
-    var expires;
-    if (days) {
-        var date = new Date();
-        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-        expires = "; expires=" + date.toGMTString();
-    }
-    else {
-        expires = "";
-    }
-    arr = [];
-    if(document.cookie != "" && document.cookie.split("=").length > 1){
-      arr.push(document.cookie.split("=")[1]);
-    }
-
-    arr.push(id);
-    document.cookie = product + "=" + arr;
-
-    $("#items").html(document.cookie.split("=")[1].split(",").length);
-}
-</script>
